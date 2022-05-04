@@ -111,15 +111,107 @@ void main() {
   );
    */
 
-
+  /*Drawer and navigation example
   runApp(
     MaterialApp(
       home: new applicationDrawer(),
     )
   );
+   */
 
+  /* SnackBar example
+  runApp(
+    MaterialApp(
+      home: new applicationSnackBar(),
+    )
+  );
+   */
+
+  runApp(
+    MaterialApp(
+      home: applicationAlertDialog(),
+    ),
+  );
 
 }
+
+//Alert dialog example
+class applicationAlertDialog extends StatefulWidget {
+  const applicationAlertDialog({Key? key}) : super(key: key);
+
+  @override
+  State<applicationAlertDialog> createState() => _applicationAlertDialogState();
+}
+
+class _applicationAlertDialogState extends State<applicationAlertDialog> {
+
+  void dialog(){
+    //show dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext cx){
+        return AlertDialog(
+          title: Text('Warning'),
+          content: Text('Do not close the alert'),
+          actions: [
+            IconButton(icon: Icon(Icons.close), onPressed: () {Navigator.pop(cx);}),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: RaisedButton(
+          onPressed: (){dialog();},
+          child: Text('Activate AlertDialog'),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+//SnackBar example
+class applicationSnackBar extends StatefulWidget {
+  const applicationSnackBar({Key? key}) : super(key: key);
+
+  @override
+  State<applicationSnackBar> createState() => _applicationSnackBarState();
+}
+
+class _applicationSnackBarState extends State<applicationSnackBar> {
+
+  final GlobalKey<ScaffoldState> _sKey = new GlobalKey<ScaffoldState>();
+
+  void methodSnack(){
+    _sKey.currentState!.showSnackBar(
+         new SnackBar(
+          content: Text('Activated SnackBar'),
+        )
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _sKey,
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            methodSnack();
+          },
+          child: Text('Activate Snackbar'),
+        ),
+      ),
+    );
+  }
+}
+
 
 
 //Drawer header & list example +
