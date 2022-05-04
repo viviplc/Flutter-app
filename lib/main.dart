@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'customw.dart';
 
 void main() {
   /* widget creation example
@@ -56,14 +57,92 @@ void main() {
   );
    */
 
+  /* Top and bottom Tabbar example
   runApp(
       new MaterialApp(
           home: applicationTabBar()
       )
   );
+   */
+
+  /* Custom Widget example
+  runApp(
+      new applicationCustomWidget()
+  );
+   */
+
+  runApp(
+    applicationTextField()
+  );
+
+
 }
 
-//top and bottom TabBar
+//TextField example
+class applicationTextField extends StatefulWidget {
+  const applicationTextField({Key? key}) : super(key: key);
+
+  @override
+  State<applicationTextField> createState() => _applicationTextFieldState();
+}
+
+class _applicationTextFieldState extends State<applicationTextField> {
+  String ptext= '';
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Dummy Application',
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green,
+          title: Text('Dummy Application'),
+        ),
+        body: Column(
+          children: <Widget>[
+            TextField(
+              /*onChanged: (String txt){
+                setState(() {
+                  ptext = txt;
+                });
+              },*/
+              onSubmitted: (String txt){
+                setState(() {
+                  ptext = txt;
+                });
+              },
+              decoration: const InputDecoration(
+                  hintText: 'Type Something',
+                  labelText: 'Fullname',
+              ),
+            ),
+            Text(ptext),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+//Custom widget example
+class applicationCustomWidget extends StatelessWidget {
+  const applicationCustomWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Custom Widget',
+      home: Scaffold(
+        body: customewidget(),
+      ),
+    );
+  }
+}
+
+
+//top and bottom TabBar example
 class applicationTabBar extends StatefulWidget {
   const applicationTabBar({Key? key}) : super(key: key);
 
@@ -78,7 +157,7 @@ class _applicationTabBarState extends State<applicationTabBar> with SingleTicker
   @override
   void initState() {
     // TODO: implement initState
-    _tcontrol = new TabController(length: 3, vsync: this);
+    _tcontrol = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -90,9 +169,9 @@ class _applicationTabBarState extends State<applicationTabBar> with SingleTicker
         bottom: TabBar(
           controller: _tcontrol,
           tabs: [
-            new Tab(icon: new Icon(Icons.home),),
-            new Tab(icon: new Icon(Icons.supervisor_account),),
-            new Tab(icon: new Icon(Icons.close),),
+            Tab(icon: Icon(Icons.home),),
+            Tab(icon: Icon(Icons.supervisor_account),),
+            Tab(icon: Icon(Icons.close),),
           ],
         ),
       ),
@@ -109,9 +188,9 @@ class _applicationTabBarState extends State<applicationTabBar> with SingleTicker
         child: TabBar(
           controller: _tcontrol,
           tabs: [
-            new Tab(icon: new Icon(Icons.home),),
-            new Tab(icon: new Icon(Icons.supervisor_account),),
-            new Tab(icon: new Icon(Icons.close),),
+            Tab(icon: Icon(Icons.home),),
+            Tab(icon: Icon(Icons.supervisor_account),),
+            Tab(icon: Icon(Icons.close),),
           ],
         ),
       ),
@@ -146,7 +225,7 @@ class _applicationAppBarState extends State<applicationAppBar> {
         leading: Icon(Icons.menu),
         //actions options definition
         actions: [
-          new IconButton(
+          IconButton(
               onPressed: (){
                 setState(() {
                   mText = 'This is Arrow icon button';
@@ -154,7 +233,7 @@ class _applicationAppBarState extends State<applicationAppBar> {
               },
               icon: Icon(Icons.arrow_forward)
           ),
-          new IconButton(
+          IconButton(
               onPressed: (){
                 setState(() {
                   mText = 'This is Close icon button';
@@ -201,7 +280,7 @@ class _applicationGridViewState extends State<applicationGridView> {
           itemCount: items.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
           itemBuilder: (BuildContext context, int index){
-            return new Card(
+            return Card(
               color: Colors.blue,
               child: Padding(padding: const EdgeInsets.all(20.0)),
             );
@@ -223,15 +302,15 @@ class applicationStack extends StatefulWidget {
 class _applicationStackState extends State<applicationStack> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Stack(
+    return Scaffold(
+      body: Stack(
         alignment: Alignment.center,
           children: <Widget> [
-            new Card(color: Colors.yellow, child: new Padding(padding: const EdgeInsets.all(200.0),)),
-            new Card(color: Colors.red, child: new Padding(padding: const EdgeInsets.all(100.0),)),
-            new Card(color: Colors.green, child: new Padding(padding: const EdgeInsets.all(50.0),)),
-            new Card(color: Colors.blue, child: new Padding(padding: const EdgeInsets.all(30.0),)),
-            new Card(color: Colors.brown, child: new Padding(padding: const EdgeInsets.all(10.0),)),
+            Card(color: Colors.yellow, child: Padding(padding: const EdgeInsets.all(200.0),)),
+            Card(color: Colors.red, child: Padding(padding: const EdgeInsets.all(100.0),)),
+            Card(color: Colors.green, child: Padding(padding: const EdgeInsets.all(50.0),)),
+            Card(color: Colors.blue, child: Padding(padding: const EdgeInsets.all(30.0),)),
+            Card(color: Colors.brown, child: Padding(padding: const EdgeInsets.all(10.0),)),
           ]
       ),
     );
@@ -267,7 +346,7 @@ class _applicationUserListState extends State<applicationUserList> {
     return MaterialApp(
       title: "Dummy Application",
       home: Scaffold(
-        appBar: AppBar(title: new Text('List Widget'),),
+        appBar: AppBar(title: Text('List Widget'),),
         body: ListView.builder(
             itemCount: items.length,
             itemBuilder: (BuildContext context, int index){
@@ -294,23 +373,23 @@ class applicationBasicList extends StatefulWidget {
 class _applicationBasicListState extends State<applicationBasicList> {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: "Dummy application",
-      home: new Scaffold(
-        appBar: new AppBar(title: new Text('List Widget'),),
-        body: new ListView(
+      home: Scaffold(
+        appBar: AppBar(title: Text('List Widget'),),
+        body: ListView(
           children: <Widget>[
-            new ListTile(
-              title: new Text('item 1'),
-              trailing: new Icon(Icons.arrow_forward),
+            ListTile(
+              title: Text('item 1'),
+              trailing: Icon(Icons.arrow_forward),
             ),
-            new ListTile(
-              title: new Text('item 2'),
-              trailing: new Icon(Icons.arrow_forward),
+            ListTile(
+              title: Text('item 2'),
+              trailing: Icon(Icons.arrow_forward),
             ),
-            new ListTile(
-              title: new Text('item 3'),
-              trailing: new Icon(Icons.arrow_forward),
+            ListTile(
+              title: Text('item 3'),
+              trailing: Icon(Icons.arrow_forward),
             ),
           ],
         ),
@@ -327,23 +406,23 @@ class applicationRowColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: "MyApplication",
-      home: new Scaffold(
-        appBar: new AppBar(title: new Text('Row & Column'),),
-        body: new Row(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Row & Column'),),
+        body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text('This'),
-            new Column(
+            Text('This'),
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text('This'),
-                new Text('is'),
-                new Text('Column'),
+                Text('This'),
+                Text('is'),
+                Text('Column'),
               ],
             ),
-            new Text('row'),
+            Text('row'),
           ],
         ),
       ),
@@ -358,18 +437,18 @@ class applicationContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        body: new Container(
-          child: new Text('This is my Container'),
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          child: Text('This is my Container'),
           height: 300.0,
           width: 300.0,
           alignment: Alignment.center,
           padding: const EdgeInsets.all(20.0),
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.green,
           ),
-          foregroundDecoration: new BoxDecoration(
+          foregroundDecoration: BoxDecoration(
             color: Colors.deepOrange,
           ),
         ),
@@ -406,11 +485,11 @@ class _applicationStateFulState extends State<applicationStateFul> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Statefull Widget',
-      home: new Scaffold(
-        body: new Center(
-          child: new RaisedButton(onPressed: () {method1();} , child: new Text(ttext),),
+      home: Scaffold(
+        body: Center(
+          child: RaisedButton(onPressed: () {method1();} , child: Text(ttext),),
         ),
       ),
     );
@@ -424,12 +503,12 @@ class _applicationStateFulState extends State<applicationStateFul> {
 class application extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Stateless Widget',
-      home: new Scaffold(
-        body: new Container(
+      home: Scaffold(
+        body: Container(
           color: Colors.pink,
-          child: new Container(
+          child: Container(
             color: Colors.yellow,
             margin: const EdgeInsets.all(30.0),
           )
