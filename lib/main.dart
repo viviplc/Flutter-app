@@ -71,12 +71,188 @@ void main() {
   );
    */
 
+  /* TextField example
   runApp(
     applicationTextField()
   );
+   */
+
+
+  /*Buttons example
+  runApp(
+    applicationButtons()
+  );
+   */
+
+  /*Checkbox example
+  runApp(
+    MaterialApp(
+      home: applicationCheckbox(),
+    )
+  );
+   */
+
+    runApp(
+        applicationRadio()
+    );
 
 
 }
+
+//Radio Button example
+class applicationRadio extends StatefulWidget {
+  const applicationRadio({Key? key}) : super(key: key);
+
+  @override
+  State<applicationRadio> createState() => _applicationRadioState();
+}
+
+class _applicationRadioState extends State<applicationRadio> {
+
+  int rValue = 0;
+
+  //Method for onclick radio button
+  void methodRadioSelect(value){
+    setState(() {
+      rValue = value;
+      print(rValue);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Dummy application',
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green,
+          title: Text('Dummy Application'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Radio(
+                value: 1,
+                groupValue: rValue,
+                onChanged: (int? rVal){
+                  methodRadioSelect(rVal);
+                },
+              ),
+              Radio(
+                value: 2,
+                groupValue: rValue,
+                onChanged: (int? rVal){
+                  methodRadioSelect(rVal);
+                },
+              ),
+              Radio(
+                value: 3,
+                groupValue: rValue,
+                onChanged: (int? rVal){
+                  methodRadioSelect(rVal);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+//Checkbox example
+class applicationCheckbox extends StatefulWidget {
+  const applicationCheckbox({Key? key}) : super(key: key);
+
+  @override
+  State<applicationCheckbox> createState() => _applicationCheckboxState();
+}
+
+class _applicationCheckboxState extends State<applicationCheckbox> {
+
+  bool cbool = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        /*child: Checkbox(
+          value: cbool,
+          onChanged: (bool? cbRead){
+            setState(() {
+              cbool = cbRead!;
+              print(cbool);
+            });
+          },
+        ),*/
+        child: CheckboxListTile(
+          value: cbool,
+          title: Text('Checkbox title'),
+          onChanged: (bool? cbRead) {
+            setState(() {
+              cbool = cbRead!;
+              print(cbool);
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+//Buttons example
+class applicationButtons extends StatefulWidget {
+  const applicationButtons({Key? key}) : super(key: key);
+
+  @override
+  State<applicationButtons> createState() => _applicationButtonsState();
+}
+
+class _applicationButtonsState extends State<applicationButtons> {
+
+  String ptext = '';
+
+  void methodClick(value){
+    setState(() {
+      ptext = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Dummy application',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Dummy application'),
+          backgroundColor: Colors.green,
+        ),
+        body: Column(
+          children: <Widget>[
+            RaisedButton(
+              onPressed: (){
+                methodClick('You press raised button');
+              },
+              child: Text('Raised Button'),
+            ),
+            FlatButton(
+              onPressed: (){
+                methodClick('You press flat button');
+              },
+              child: Text('Flat Button'),
+            ),
+            Text(ptext),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 
 //TextField example
 class applicationTextField extends StatefulWidget {
@@ -168,7 +344,7 @@ class _applicationTabBarState extends State<applicationTabBar> with SingleTicker
         title: Text('Tabbar'),
         bottom: TabBar(
           controller: _tcontrol,
-          tabs: [
+          tabs: const [
             Tab(icon: Icon(Icons.home),),
             Tab(icon: Icon(Icons.supervisor_account),),
             Tab(icon: Icon(Icons.close),),
@@ -177,7 +353,7 @@ class _applicationTabBarState extends State<applicationTabBar> with SingleTicker
       ),
       body: TabBarView(
         controller: _tcontrol,
-        children: [
+        children: const [
           Center(child: Text('Welcome to Home'),),
           Center(child: Text('Welcome to User Account'),),
           Center(child: Text('Welcome to Close'),),
@@ -187,7 +363,7 @@ class _applicationTabBarState extends State<applicationTabBar> with SingleTicker
         color: Colors.blueGrey,
         child: TabBar(
           controller: _tcontrol,
-          tabs: [
+          tabs: const [
             Tab(icon: Icon(Icons.home),),
             Tab(icon: Icon(Icons.supervisor_account),),
             Tab(icon: Icon(Icons.close),),
@@ -305,12 +481,12 @@ class _applicationStackState extends State<applicationStack> {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-          children: <Widget> [
-            Card(color: Colors.yellow, child: Padding(padding: const EdgeInsets.all(200.0),)),
-            Card(color: Colors.red, child: Padding(padding: const EdgeInsets.all(100.0),)),
-            Card(color: Colors.green, child: Padding(padding: const EdgeInsets.all(50.0),)),
-            Card(color: Colors.blue, child: Padding(padding: const EdgeInsets.all(30.0),)),
-            Card(color: Colors.brown, child: Padding(padding: const EdgeInsets.all(10.0),)),
+          children: const <Widget> [
+            Card(color: Colors.yellow, child: Padding(padding: EdgeInsets.all(200.0),)),
+            Card(color: Colors.red, child: Padding(padding: EdgeInsets.all(100.0),)),
+            Card(color: Colors.green, child: Padding(padding: EdgeInsets.all(50.0),)),
+            Card(color: Colors.blue, child: Padding(padding: EdgeInsets.all(30.0),)),
+            Card(color: Colors.brown, child: Padding(padding: EdgeInsets.all(10.0),)),
           ]
       ),
     );
@@ -378,7 +554,7 @@ class _applicationBasicListState extends State<applicationBasicList> {
       home: Scaffold(
         appBar: AppBar(title: Text('List Widget'),),
         body: ListView(
-          children: <Widget>[
+          children: const <Widget>[
             ListTile(
               title: Text('item 1'),
               trailing: Icon(Icons.arrow_forward),
@@ -416,7 +592,7 @@ class applicationRowColumn extends StatelessWidget {
             Text('This'),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: const <Widget>[
                 Text('This'),
                 Text('is'),
                 Text('Column'),
