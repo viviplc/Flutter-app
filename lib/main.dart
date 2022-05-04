@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'customw.dart';
+import 'firstpage.dart';
 
 void main() {
   /* widget creation example
@@ -92,12 +93,169 @@ void main() {
   );
    */
 
+  /* Radio Button example
     runApp(
         applicationRadio()
     );
+   */
+
+  /*Slider example
+    runApp(
+      applicationSlider()
+    );
+   */
+
+  /*Switch example
+  runApp(
+    applicationSwitch()
+  );
+   */
+
+
+  runApp(
+    MaterialApp(
+      home: new applicationDrawer(),
+    )
+  );
 
 
 }
+
+
+//Drawer header & list example +
+//Navigation Route for different pages example
+class applicationDrawer extends StatelessWidget {
+  const applicationDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Drawer'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text('Test Drawer'),
+              accountEmail: Text('test@test.com'),
+              currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.black26,
+                  child: Text('T'),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.orange,
+              ),
+              otherAccountsPictures: [
+                CircleAvatar(
+                  backgroundColor: Colors.black26,
+                  child: Text('D'),
+                ),
+              ],
+            ),
+            ListTile(
+              title: Text('Page 1'), 
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=> firstPage('first page'))),
+            ),
+            ListTile(
+              title: Text('Page 2'),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=> firstPage('second page'))),
+            ),
+            ListTile(
+              title: Text('Close'),
+              trailing: Icon(Icons.close),
+              onTap: () { Navigator.pop(context);} ,),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+//Swtich example
+class applicationSwitch extends StatefulWidget {
+  const applicationSwitch({Key? key}) : super(key: key);
+
+  @override
+  State<applicationSwitch> createState() => _applicationSwitchState();
+}
+
+class _applicationSwitchState extends State<applicationSwitch> {
+
+  bool sbool = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Switch(
+            value: sbool,
+            onChanged: (bool? sb) {
+              setState(() {
+                sbool = sb!;
+                print(sbool);
+              });
+            },
+          )
+        ),
+      ),
+    );
+  }
+}
+
+
+
+//Slider example
+class applicationSlider extends StatefulWidget {
+  const applicationSlider({Key? key}) : super(key: key);
+
+  @override
+  State<applicationSlider> createState() => _applicationSliderState();
+}
+
+class _applicationSliderState extends State<applicationSlider> {
+  double dtext = 2.0;
+
+  void methodSlider(value){
+    setState(() {
+      dtext = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title:'Dummy Application',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Dummy Application'),
+          backgroundColor: Colors.green,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Slider(
+                  value: dtext,
+                  min: 1.0,
+                  max: 10.0,
+                  onChanged: (double dVal){
+                    methodSlider(dVal);
+                  }),
+              Text('value: $dtext'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 //Radio Button example
 class applicationRadio extends StatefulWidget {
